@@ -1,1 +1,14 @@
-%h1 Hedonism Bot
+%h1#header Hedonism Bot
+%h2#subheader Hedonism Bot tracks the shows you're currently watching, allowing you to see at-a-glance when the next episode airs. No more Wikipedia/IMDB digging!
+#query
+  %form{ controller: 'trackings', action: 'create', method: 'post' }
+    = @messages
+    = text_field_tag "show_title", "", { placeholder: "\"Game of Thrones\", \"Adventure Time\", \"Dexter\"", autofocus: true }
+    = submit_tag "+"
+#mid_links
+  = link_to "Signup", signup_path
+  = link_to "Login", login_path
+  = link_to "About", about_path
+
+#shows
+  = @shows
