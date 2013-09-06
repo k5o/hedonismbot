@@ -33,12 +33,12 @@ class Show < ActiveRecord::Base
       Show.create!({ 
         last_episode: @latest_episode[/(\d+x\d+)/],
         last_title: @latest_episode.match(/\^(.+)\^/).captures.first,
-        last_airdate: @latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first
+        last_airdate: @latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
         next_episode: @next_episode[/(\d+x\d+)/],
         next_title: @next_episode.match(/\^(.+)\^/).captures.first,
         next_airdate: @next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
-        status: @status
-        airtime: @airtime.match(/at\W(.+)$/).captures.first
+        status: @status,
+        airtime: @airtime.match(/at\W(.+)$/).captures.first,
         banner: @banner
       })
     end
