@@ -11,6 +11,29 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130906211307) do
+
+  create_table "shows", :force => true do |t|
+    t.string   "title"
+    t.string   "banner"
+    t.string   "status"
+    t.string   "latest_episode"
+    t.string   "next_episode"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  create_table "trackings", :force => true do |t|
+    t.integer "users_id"
+    t.integer "shows_id"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "password_salt"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
 
 end

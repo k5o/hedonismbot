@@ -98,9 +98,6 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    sofa (0.1.3)
-      crack
-      httparty
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -124,11 +121,11 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby (~> 3.0.0)
   coffee-rails (~> 3.2.1)
+  crack
   debugger
   jquery-rails
   pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
-  sofa
   tvdb_party
   uglifier (>= 1.0.3)
