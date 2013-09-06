@@ -11,16 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130906211307) do
+ActiveRecord::Schema.define(:version => 20130906230515) do
 
   create_table "shows", :force => true do |t|
     t.string   "title"
     t.string   "banner"
     t.string   "status"
-    t.string   "latest_episode"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "last_title"
+    t.date     "last_airdate"
+    t.string   "last_episode"
+    t.string   "next_title"
+    t.date     "next_airdate"
     t.string   "next_episode"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.string   "airtime"
   end
 
   create_table "trackings", :force => true do |t|
