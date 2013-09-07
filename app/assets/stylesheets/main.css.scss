@@ -1,6 +1,10 @@
+@mixin box-sizing(){
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
 html {
-  font-size: 16px;
-  line-height: 20px;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -42,7 +46,7 @@ a {
   #header {
     margin: 0;
     padding: 2.8em 1em 1em 1em;
-    font-size: 2.4em;
+    font-size: 2.8em;
     font-weight: 700;
     text-align: center;
   }
@@ -71,7 +75,7 @@ a {
     font-size: 1.5em;
     font-weight: 700;
     border: 0;
-    border-radius: 20px;
+    border-radius: 100px;
     &:hover {
       cursor: pointer;
       background-color: #F5B642;
@@ -84,6 +88,7 @@ a {
   height: 100%;
   display: block;
   min-height: 100%;
+  padding-bottom: 40px;
 }
 
 #mid_links {
@@ -91,21 +96,45 @@ a {
   text-align: center;
 }
 
-#demo_show_view {
-  opacity: 0.7;
-  margin: 10px;
-  padding: 20px;
+#shows {
+  margin: auto;
   width: 100%;
-  max-width: 480px;
-  display: inline-block;
-  background-color: #FBFCFC;
+  max-width: 960px;
+  display: block;
+
+  h2 {
+    margin-left: 10px;
+  }
+
+  strong {
+    font-weight: 400;
+  }
+
+  #demo_show_view {
+    /*opacity: 0.5;*/
+  }
+
+  .show_view {
+    @include box-sizing();
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+    max-width: 440px;
+    display: inline-block;
+    background-color: #FBFCFC;
+  }
+
+  .next {
+    font-size: 1em;
+  }
+
+  .last {
+    font-size: 1em;
+  }
+
+  .ended {
+    font-weight: 400;
+    color: #EE2126;
+  }
 }
 
-.show_view {
-  margin: 10px;
-  padding: 20px;
-  width: 100%;
-  max-width: 480px;
-  display: inline-block;
-  background-color: #FBFCFC;
-}
