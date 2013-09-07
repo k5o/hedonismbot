@@ -1,0 +1,19 @@
+%li
+  .show_view
+    %a{href: "http://thepiratebay.sx/search/#{show.title}/0/99/0"}
+      %img{src: show.banner, width: "420px"}
+    - if show.status == "Ended"
+      %p.ended= "Show has ended."
+    - else
+      .next
+        %p
+          %strong= "Next Air Date: #{show.next_airdate}"
+          %br
+          = "Air Time: #{show.airtime}"
+          %br
+          = "Episode: #{show.next_episode} - \"#{show.next_title}\""
+    .last
+      %p
+        %strong= "Last Air Date: #{show.last_airdate}"
+        %br
+        = "Episode: #{show.last_episode} - \"#{show.last_title}\""
