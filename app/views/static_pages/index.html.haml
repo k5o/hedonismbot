@@ -18,21 +18,23 @@
         %h2 Sample cards:
         #demo_show_view
           - @demo_shows.each do |show|
-            .show_view
-              %img{src: show.banner, width: "420px"}
-              - if show.status == "Ended"
-                %p.ended= "Show has ended."
-              - else
-                .next
+            %li
+              .show_view
+                %img{src: show.banner, width: "420px"}
+                - if show.status == "Ended"
+                  %p.ended= "Show has ended."
+                - else
+                  .next
+                    %p
+                      %strong= "Next Air Date: #{show.next_airdate}"
+                      %br
+                      = "Air Time: #{show.airtime}"
+                      %br
+                      = "Episode: #{show.next_episode} - \"#{show.next_title}\""
+                      
+                .last
                   %p
-                    %strong= "Next Air Date: #{show.next_airdate}"
+                    %strong= "Last Air Date: #{show.last_airdate}"
                     %br
-                    = "Air Time: #{show.airtime}"
-                    %br
-                    = "Episode: #{show.next_episode} - \"#{show.next_title}\""
-                    
-              .last
-                %p
-                  %strong= "Last Air Date: #{show.last_airdate}"
-                  %br
-                  = "Episode: #{show.last_episode} - \"#{show.last_title}\""
+                    = "Episode: #{show.last_episode} - \"#{show.last_title}\""
+  .footer
