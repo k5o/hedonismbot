@@ -11,8 +11,11 @@
           = text_field_tag "show_title", "", { placeholder: "Track a new show, e.g. \"Game of Thrones\"", autofocus: true }
           = submit_tag "+"
       #mid_links
-        = link_to "Signup", signup_path
-        = link_to "Login", login_path
+        - if current_user.nil? || current_user.guest?
+          = link_to "Signup", signup_path
+          = link_to "Login", login_path
+        - else
+          = link_to "Logout", logout_path
         = link_to "About", about_path
   .content
     #shows
@@ -21,5 +24,10 @@
         = render partial: "shows/show", collection: @demo_shows  
       - else
         %h2 Your Tracked Shows:
+        %p
+          = "Logged in as #{current_user.name}."
+          - if current_user.guest?
+            = link_to "Sign up", signup_path
+            = "to save your shows."
         = render @shows
   .footer

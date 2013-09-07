@@ -1,17 +1,38 @@
 class User < ActiveRecord::Base
   has_many :trackings
   has_many :shows, through: :trackings
-
   has_secure_password
 
   EMAIL_REGEXP = /^([0-9a-zA-Z]([-\.\w+]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/
 
-  validates_confirmation_of :password
-  validates_presence_of :password, :on => :create
-  validates :password, :length => { :minimum => 6 }
-  validates_presence_of :email
-  validates_uniqueness_of :username, :email
-  validates :email, :format => { :with => EMAIL_REGEXP }
+  attr_accessible :email, :password
+
+  validates_presence_of :password, :on => :create, unless: :guest?
+  validates :password, :length => { :minimum => 3 }, unless: :guest?
+  validates_presence_of :email, :password_digest, unless: :guest?
+  validates_uniqueness_of :email, unless: :guest?
+  validates :email, :format => { :with => EMAIL_REGEXP }, unless: :guest?
+
+  require 'bcrypt'
+  attr_reader :password
+  include ActiveModel::SecurePassword::InstanceMethodsOnActivation
+
+  def name
+    guest ? "Guest" : email
+  end
+
+  def move_to(user)
+    shows.update_all(user_id: user.id)
+  end
+
+  def self.new_guest
+    random_password = SecureRandom.hex(4)
+
+    new do |u|
+      u.guest = true 
+      u.password = random_password 
+    end
+  end
 
   def encrypt_password
     if password.present?

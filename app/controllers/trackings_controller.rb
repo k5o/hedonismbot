@@ -2,7 +2,7 @@ class TrackingsController < ApplicationController
   before_filter :load_imperatives
 
   def create
-    @title = params[:show_title]    
+    @title = params[:show_title]
 
     if Show.show_available?(@title)
       @canonical_title = Show.show_available?(@title)
@@ -22,7 +22,13 @@ class TrackingsController < ApplicationController
   private
 
   def load_imperatives
-    current_user ? @user = User.find(current_user.id) : @user = User.new
+    # Creates a guest user
+    current_user ? @user = User.find(current_user.id) : @user = User.new_guest
+    @user.save
+    puts @user.id
+    puts "%" * 100
+    debugger
+    session[:user_id] = @user.id
  
     @shows = @user.shows
 

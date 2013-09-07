@@ -1,4 +1,6 @@
 class Show < ActiveRecord::Base
+  require 'figaro'
+
   has_many :trackings
   has_many :users, through: :trackings
 
@@ -11,8 +13,9 @@ class Show < ActiveRecord::Base
 
   class << self
     def show_available?(query)
-      # Returns canonical show title if true
-      check_for_show_data(query) ? check_for_show_data.match(/Show Name@(.+)\nShow URL{1}/).captures.first : false
+      canonical_title = check_for_show_data(query).match(/Show Name@(.+)\nShow URL{1}/)
+
+      canonical_title.present? ? canonical_title.captures.first : false 
     end
 
     def create_show_data(canonical_title, show_id)
@@ -55,9 +58,8 @@ class Show < ActiveRecord::Base
     end
 
     def fetch_show_banner(title)
-      tvdb   = TvdbParty::Search.new(ENV["TVDB_API_KEY"])
+      tvdb   = TvdbParty::Search.new(Figaro.env.tvdb_api_key)
       show   = tvdb.get_series_by_id(tvdb.search(title).first["seriesid"])
-
       show.series_banners('en').first.url
     end
   end

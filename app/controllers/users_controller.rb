@@ -4,15 +4,16 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(params[:user]) ? User.new(params[:user]) : User.new_guest
 
     if @user.save
+      current_user.move_to(@user) if current_user && current.user.guest?
       session[:user_id] = @user.id
-      current_user = @user.id
       flash[:notice] = "Signed up!"
       redirect_to root_url
     else
-      render :new
+      flash[:alert] = "Something went wrong, please try again."
+      redirect_to root_url
     end
   end
 

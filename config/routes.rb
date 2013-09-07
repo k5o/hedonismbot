@@ -7,4 +7,5 @@ Hedonismbot::Application.routes.draw do
   get '/about' => "static_pages#about", as: "about"
   get '/signup' => "users#new", as: "signup"
   get '/signup' => "sessions#new", as: "login"
+  get '/logout' => "sessions#destroy", as: "logout"
 end
