@@ -1,0 +1,1 @@
+api_key = ENV["TVDB_API_KEY"]

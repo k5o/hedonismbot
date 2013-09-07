@@ -8,6 +8,7 @@ gem 'debugger'
 gem 'tvdb_party'
 gem 'crack'
 gem 'haml-rails'
+gem 'figaro'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

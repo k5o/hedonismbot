@@ -2,6 +2,8 @@ class Show < ActiveRecord::Base
   has_many :trackings
   has_many :users, through: :trackings
 
+  attr_accessible :last_episode, :last_title, :last_airdate, :next_episode, :next_title, :next_airdate, :status, :airtime, :banner
+
   # Called by #batch_update_next_airdate!
   def update_next_airdate!
 
@@ -26,8 +28,8 @@ class Show < ActiveRecord::Base
         @airtime = data if data[/^Airtime/]
       end
 
-      tvdb = TvdbParty::Search.new(ENV['api_key'])
-      show = tvdb.get_series_by_id(tvdb.search(query)["seriesid"])
+      tvdb = TvdbParty::Search.new(ENV["TVDB_API_KEY"])
+      show = tvdb.get_series_by_id(tvdb.search(query).first["seriesid"])
       @banner = show.series_banners('en').first.url
 
       Show.create!({ 
