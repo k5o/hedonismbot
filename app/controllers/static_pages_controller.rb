@@ -7,5 +7,6 @@ class StaticPagesController < ApplicationController
     end
 
     @shows = @user.shows
+    @demo_shows = [Show.find_by_title("Game of Thrones"), Show.find_by_title("Futurama")]
   end
 end
