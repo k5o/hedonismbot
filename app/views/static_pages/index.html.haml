@@ -3,6 +3,9 @@
     .heading
       %h1#header HedonismBot
       %h2#subheader Track the shows you're currently watching, allowing you to see at-a-glance when the next episode airs. No more Wikipedia/IMDB digging!
+      #flash
+        -flash.each do |name, msg|
+          = content_tag :div, msg, :id => "flash_notice"
       #query
         = form_tag(trackings_path, method: :post) do
           = text_field_tag "show_title", "", { placeholder: "Track a new show, e.g. \"Game of Thrones\"", autofocus: true }

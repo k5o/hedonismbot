@@ -70,13 +70,26 @@ li {
     font-size: 1.2em;
     font-weight: 400;
   }
+
+  #flash_notice {
+    @include box-sizing();
+    text-align: center;
+    margin: auto;
+    color: #EE2126;
+    width: 100%;
+    padding: 0.5em 1em 0.5em 1em;
+    background-color: #F19D9C;
+    border: 2px solid #EE2126;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
 }
 
 #query {
   margin: auto;
   text-align: center;
   #show_title {
-    width: 80%;
+    width: 90%;
     padding: 10px;
     font-size: 1.4em;
   }
@@ -100,7 +113,6 @@ li {
   height: 100%;
   display: block;
   min-height: 100%;
-  /*padding-bottom: 40px;*/
 }
 
 #mid_links {
@@ -120,10 +132,6 @@ li {
 
   strong {
     font-weight: 400;
-  }
-
-  #demo_show_view {
-    /*opacity: 0.5;*/
   }
 
   .show_view {
