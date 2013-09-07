@@ -2,7 +2,7 @@ class Show < ActiveRecord::Base
   has_many :trackings
   has_many :users, through: :trackings
 
-  attr_accessible :last_episode, :last_title, :last_airdate, :next_episode, :next_title, :next_airdate, :status, :airtime, :banner
+  attr_accessible :title, :last_episode, :last_title, :last_airdate, :next_episode, :next_title, :next_airdate, :status, :airtime, :banner
 
   # Called by #batch_update_next_airdate!
   def update_next_airdate!
@@ -22,25 +22,29 @@ class Show < ActiveRecord::Base
       raise ShowNotFound unless show_data
 
       show_data.split("\n").each do |data|
+        @title = data if data[/^Show Name/]
         @latest_episode = data if data[/^Latest Episode/]
         @next_episode = data if data[/^Next Episode/]
         @status = data if data[/^Status/]
         @airtime = data if data[/^Airtime/]
       end
 
+      @title = @title.match(/@(.+)$/).captures.first
+
       tvdb = TvdbParty::Search.new(ENV["TVDB_API_KEY"])
-      show = tvdb.get_series_by_id(tvdb.search(query).first["seriesid"])
+      show = tvdb.get_series_by_id(tvdb.search(@title).first["seriesid"])
       @banner = show.series_banners('en').first.url
 
       Show.create!({ 
+        title: @title,
         last_episode: @latest_episode[/(\d+x\d+)/],
         last_title: @latest_episode.match(/\^(.+)\^/).captures.first,
         last_airdate: @latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
-        next_episode: @next_episode[/(\d+x\d+)/],
-        next_title: @next_episode.match(/\^(.+)\^/).captures.first,
-        next_airdate: @next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
-        status: @status,
-        airtime: @airtime.match(/at\W(.+)$/).captures.first,
+        next_episode: @next_episode ? @next_episode[/(\d+x\d+)/] : nil,
+        next_title: @next_episode ? @next_episode.match(/\^(.+)\^/).captures.first : nil,
+        next_airdate: @next_episode ? @next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
+        status: @status.match(/@(.+)$/).captures.first,
+        airtime: @airtime ? @airtime.match(/at\W(.+)$/).captures.first : nil,
         banner: @banner
       })
     end
