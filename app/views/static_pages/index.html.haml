@@ -4,9 +4,8 @@
       %h1#header HedonismBot
       %h2#subheader Track the shows you're currently watching, allowing you to see at-a-glance when the next episode airs. No more Wikipedia/IMDB digging!
       #query
-        %form{ controller: 'trackings', action: 'create', method: 'post' }
-          = @messages
-          = text_field_tag "show_title", "", { placeholder: "\"Game of Thrones\", \"Adventure Time\", \"Top Gear\"", autofocus: true }
+        = form_tag(trackings_path, method: :post) do
+          = text_field_tag "show_title", "", { placeholder: "Track a new show, e.g. \"Game of Thrones\"", autofocus: true }
           = submit_tag "+"
       #mid_links
         = link_to "Signup", signup_path
@@ -31,10 +30,30 @@
                       = "Air Time: #{show.airtime}"
                       %br
                       = "Episode: #{show.next_episode} - \"#{show.next_title}\""
-                      
                 .last
                   %p
                     %strong= "Last Air Date: #{show.last_airdate}"
                     %br
                     = "Episode: #{show.last_episode} - \"#{show.last_title}\""
+      - else
+        %h2 Your Tracked Shows:
+        - @demo_shows.each do |show|
+          %li
+            .show_view
+              %img{src: show.banner, width: "420px"}
+              - if show.status == "Ended"
+                %p.ended= "Show has ended."
+              - else
+                .next
+                  %p
+                    %strong= "Next Air Date: #{show.next_airdate}"
+                    %br
+                    = "Air Time: #{show.airtime}"
+                    %br
+                    = "Episode: #{show.next_episode} - \"#{show.next_title}\""   
+              .last
+                %p
+                  %strong= "Last Air Date: #{show.last_airdate}"
+                  %br
+                  = "Episode: #{show.last_episode} - \"#{show.last_title}\""
   .footer
