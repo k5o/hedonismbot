@@ -99,6 +99,7 @@ a {
 }
 
 .content {
+  clear: left;
   background-color: #B9CFD6;
   height: 100%;
   display: block;
@@ -188,3 +189,29 @@ strong {
   clear: left;
   padding-bottom: 40px;
 }
+
+#popin {
+  padding-bottom: 1em;
+
+  #about {
+    display: none;
+
+    #about_blurb {
+      @include box-sizing();
+      font-size: 1em;
+      line-height: 1.5em;
+      margin: 0;
+      width: 100%;
+      max-width: 384px;
+      display: inline-block;
+      padding: 12px;
+    }
+
+    #youtube {
+      width: 40%;
+      display: inline-block;
+      padding: 12px;
+    }
+  }
+}
+
