@@ -18,7 +18,7 @@ class Show < ActiveRecord::Base
       canonical_title.present? ? canonical_title.captures.first : false 
     end
 
-    def create_show_data(canonical_title, show_id)
+    def create_show_data(query, canonical_title, show_id)
       show_data = check_for_show_data(canonical_title)
       raise ShowNotFound unless show_data
 
@@ -42,7 +42,7 @@ class Show < ActiveRecord::Base
         next_airdate: next_episode.present? ? next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
         status:       status.match(/@(.+)$/).captures.first,
         airtime:      airtime.present? ? airtime.match(/@(.+)$/).captures.first : nil,
-        banner:       fetch_show_banner(canonical_title)
+        banner:       fetch_show_banner(query, canonical_title)
       })
     end
 
@@ -57,10 +57,17 @@ class Show < ActiveRecord::Base
       Crack::XML.parse(response)["pre"]
     end
 
-    def fetch_show_banner(title)
+    def fetch_show_banner(query, canonical_title)
       tvdb   = TvdbParty::Search.new(Figaro.env.tvdb_api_key)
-      show   = tvdb.get_series_by_id(tvdb.search(title).first["seriesid"])
-      show.series_banners('en').first.url
+
+      begin
+        show   = tvdb.get_series_by_id(tvdb.search(canonical_title).first["seriesid"])
+      rescue NoMethodError
+        show   = tvdb.get_series_by_id(tvdb.search(query).first["seriesid"])
+      rescue NoMethodError
+        banner = "#{Rails.root.join('app', 'assets', 'images', '404banner.jpg')}"
+      end
+        show ? show.series_banners('en').first.url : banner
     end
   end
 end

@@ -8,7 +8,7 @@ class TrackingsController < ApplicationController
       @canonical_title = Show.show_available?(@title)
       @show            = Show.find_or_initialize_by_title(@canonical_title)
 
-      Show.create_show_data(@canonical_title, @show.id) if @show.new_record?
+      Show.create_show_data(@title, @canonical_title, @show.id) if @show.new_record?
       Tracking.create(:user_id => @user.id, :show_id => @show.id)
       
       render 'static_pages/index'
