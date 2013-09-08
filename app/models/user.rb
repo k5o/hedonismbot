@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def move_to(user)
-    shows.update_all(user_id: user.id)
+    user.shows << shows
   end
 
   def self.new_guest
