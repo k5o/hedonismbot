@@ -31,8 +31,7 @@ class Show < ActiveRecord::Base
         airtime        = data if data[/^Airtime/]
       end
 
-      Show.create!({
-        id:           show_id, 
+      Show.find(show_id).update_attributes({
         title:        canonical_title,
         last_episode: latest_episode[/(\d+x\d+)/],
         last_title:   latest_episode.match(/\^(.+)\^/).captures.first,
