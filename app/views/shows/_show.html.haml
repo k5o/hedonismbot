@@ -2,7 +2,7 @@
   .show_view
     %a{href: "http://thepiratebay.sx/search/#{show.title}/0/99/0"}
       %img{src: show.banner, width: "420px"}
-    - if show.status == "Ended"
+    - if show.status == "Ended" || show.status == "Canceled/Ended"
       %p.ended= "Show has ended."
     - else
       .next

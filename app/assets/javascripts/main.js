@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('.heading').on('click', '#about_link', function(e){
+  $('.wrapper').on('click', '#about_link', function(e){
     e.preventDefault();
     $('#signup').css("display", "none");
     $('#login').css("display", "none");
@@ -13,7 +13,7 @@ $(document).ready(function () {
     $('#signup').toggle(300);
   });
 
-  $('.heading').on('click', '#login_link', function(e){
+  $('.wrapper').on('click', '#login_link', function(e){
     e.preventDefault();
     $('#about').css("display", "none");
     $('#signup').css("display", "none");
