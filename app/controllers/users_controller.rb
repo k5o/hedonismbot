@@ -3,10 +3,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    puts params.inspect
     @user = User.new(params[:user]) ? User.new(params[:user]) : User.new_guest
-
-    puts @user.inspect
 
     if @user.save
       current_user.move_to(@user) if current_user && current_user.guest?
@@ -14,7 +11,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Signed up!"
       redirect_to root_url
     else
-      puts @user.errors.inspect
       flash[:alert] = "Something went wrong, please try again."
       redirect_to root_url
     end

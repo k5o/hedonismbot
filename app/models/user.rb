@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_many :trackings
   has_many :shows, through: :trackings
   has_secure_password
+  before_save :encrypt_password
 
   EMAIL_REGEXP = /^([0-9a-zA-Z]([-\.\w+]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$/
 
@@ -12,10 +13,6 @@ class User < ActiveRecord::Base
   validates_presence_of :email, :password_digest, unless: :guest?
   validates_uniqueness_of :email, unless: :guest?
   validates :email, :format => { :with => EMAIL_REGEXP }, unless: :guest?
-
-  require 'bcrypt'
-  attr_reader :password
-  include ActiveModel::SecurePassword::InstanceMethodsOnActivation
 
   def name
     guest ? "Guest" : email
