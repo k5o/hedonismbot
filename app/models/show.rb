@@ -18,7 +18,7 @@ class Show < ActiveRecord::Base
       canonical_title.present? ? canonical_title.captures.first : false 
     end
 
-    def create_show_data(query, canonical_title = nil, show_id = nil)
+    def create_show_data(query, canonical_title, show_id)
       show_data = check_for_show_data(canonical_title)
       raise ShowNotFound unless show_data
 
