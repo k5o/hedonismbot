@@ -2,21 +2,21 @@
   .wrapper
     .heading
       %h1#header HedonismBot
-      %h2#subheader Track the shows you're currently watching, allowing you to see at-a-glance when the next episode airs. No more Wikipedia/IMDB digging!
+      %h2#subheader Track the shows you're currently watching, allowing you to see at-a-glance when the next episode or season will air. No more Wikipedia/IMDB digging!
       #flash
         -flash.each do |name, msg|
           = content_tag :div, msg, :id => "flash_notice"
       #query
         = form_tag(trackings_path, method: :post) do
-          = text_field_tag "show_title", "", { placeholder: "Track a new show, e.g. \"Game of Thrones\"", autofocus: true }
+          = text_field_tag "show_title", "", { placeholder: "Try now: enter a show title, e.g. \"Game of Thrones\"", autofocus: true }
           = submit_tag "+"
       #mid_links
         - if current_user.nil? || current_user.guest?
-          = link_to "Signup", signup_path
-          = link_to "Login", login_path
+          %li= link_to "Signup", signup_path
+          %li= link_to "Login", login_path
         - else
-          = link_to "Logout", logout_path
-        = link_to "About", about_path
+          %li= link_to "Logout", logout_path
+        %li= link_to "About", about_path
   .content
     #shows
       - if @shows.empty?
@@ -24,7 +24,7 @@
         = render partial: "shows/show", collection: @demo_shows  
       - else
         %h2 Your Tracked Shows:
-        %p
+        %p#logged_in_as
           = "Logged in as #{current_user.name}."
           - if current_user.guest?
             = link_to "Sign up", signup_path

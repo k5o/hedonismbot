@@ -25,9 +25,6 @@ class TrackingsController < ApplicationController
     # Creates a guest user
     current_user ? @user = User.find(current_user.id) : @user = User.new_guest
     @user.save
-    puts @user.id
-    puts "%" * 100
-    debugger
     session[:user_id] = @user.id
  
     @shows = @user.shows

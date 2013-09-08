@@ -7,13 +7,13 @@
     - else
       .next
         %p
-          %strong= "Next Air Date: #{show.next_airdate}"
+          %strong.next_date= show.next_airdate ? "Next Air Date: #{show.next_airdate.strftime("%m-%d-%Y")}" : "Next Air Date: N/A"
           %br
-          = "Air Time: #{show.airtime}"
+          = show.airtime ? "Air Time: #{show.airtime}" : "Air Time: N/A"
           %br
-          = "Episode: #{show.next_episode} - \"#{show.next_title}\""
+          = show.next_episode ? "Episode: #{show.next_episode} - \"#{show.next_title}\"" : "Episode: N/A"
     .last
       %p
-        %strong= "Last Air Date: #{show.last_airdate}"
+        %strong= "Last Air Date: #{show.last_airdate.strftime("%m-%d-%Y")}"
         %br
         = "Episode: #{show.last_episode} - \"#{show.last_title}\""
