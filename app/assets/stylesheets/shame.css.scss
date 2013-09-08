@@ -1,0 +1,4 @@
+/* Signup button spaces out a little bit for some unknown reason. This fixes it on my monitor */
+#signup input[type=submit] {
+  margin-left: -4px;
+}

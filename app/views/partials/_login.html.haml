@@ -1,0 +1,8 @@
+#login_blurb
+  Login to access your shows:
+  = form_tag(sessions_path, method: :post) do
+    = text_field_tag "email", "", { placeholder: "E-mail" }
+    %br
+    = password_field_tag "password", "", { placeholder: "Password" }
+    %br
+    = submit_tag "Log me in!"

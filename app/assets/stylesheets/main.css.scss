@@ -99,7 +99,6 @@ a {
 }
 
 .content {
-  clear: left;
   background-color: #B9CFD6;
   height: 100%;
   display: block;
@@ -195,7 +194,6 @@ strong {
 
   #about {
     display: none;
-
     #about_blurb {
       @include box-sizing();
       font-size: 1em;
@@ -211,6 +209,39 @@ strong {
       width: 40%;
       display: inline-block;
       padding: 12px;
+    }
+  }
+
+  #signup, #login {
+    display: none;
+    text-align: center;
+    padding: 2%;
+  }
+
+  input[type=text], input[type=password] {
+    padding: 5px;
+    width: 374px;
+    font-size: 1.2em;
+    font-family: "Open Sans";
+    border: 1px;
+  }
+
+  input[type=submit] {
+    margin-left: -4px;
+    font-size: 1.6em;
+    padding: 2%;
+    background-color: #53B6CE;
+    color: #FBFCFC;
+    border: 0px;
+    width: 384px;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease;
+       -moz-transition: all 0.2s ease;
+         -o-transition: all 0.2s ease;
+        -ms-transition: all 0.2s ease;
+            transition: all 0.2s ease;
+    &:hover {
+      background-color: #F5B642;
     }
   }
 }

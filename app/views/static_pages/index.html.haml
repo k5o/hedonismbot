@@ -12,14 +12,16 @@
           = submit_tag "+"
       #mid_links
         - if current_user.nil? || current_user.guest?
-          %li= link_to "Signup", signup_path
-          %li= link_to "Login", login_path
+          %li= link_to "Signup", '#', {class: 'signup_link'}
+          %li= link_to "Login", '#', {id: 'login_link'}
         - else
           %li= link_to "Logout", logout_path
-        %li= link_to "About", about_path, {id: 'about_link'}
+        %li= link_to "About", '#', {id: 'about_link'}
       #popin
         #signup
+          = render partial: "partials/signup" 
         #login
+          = render partial: "partials/login" 
         #about
           = render partial: "partials/about" 
   .content
@@ -32,7 +34,7 @@
         %p#logged_in_as
           = "Logged in as #{current_user.name}."
           - if current_user.guest?
-            = link_to "Sign up", signup_path
+            = link_to "Sign up", '#', {id: 'scroll_to_signup', class: 'signup_link'}
             = "to save your shows."
         = render @shows
   .footer
