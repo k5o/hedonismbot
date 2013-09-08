@@ -1,4 +1,6 @@
 def seeder(query, canonical_title)
+  show_data = check_for_show_data(canonical_title)
+  
   latest_episode = "" ; next_episode = "" ; status = "" ; airtime = ""
 
   show_data.split("\n").each do |data|
@@ -20,6 +22,12 @@ def seeder(query, canonical_title)
     airtime:      airtime.present? ? airtime.match(/@(.+)$/).captures.first : nil,
     banner:       fetch_show_banner(query, canonical_title)
   })
+end
+
+def check_for_show_data(query)
+  response = HTTParty.get('http://services.tvrage.com/tools/quickinfo.php', :query => {:show => query}, :format => :html)
+
+  Crack::XML.parse(response)["pre"]
 end
 
 def fetch_show_banner(query, canonical_title)
