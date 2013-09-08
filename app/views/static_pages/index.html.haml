@@ -9,7 +9,8 @@
       #query
         = form_tag(trackings_path, method: :post) do
           = text_field_tag "show_title", "", { placeholder: "Try now: enter a show title, e.g. \"Game of Thrones\"", autofocus: true }
-          = submit_tag "+"
+          %a{controller: "trackings", action: "create", method: :post}
+            %i.icon-plus-circled
     #mid_wrapper
       #mid_links
         - if current_user.nil? || current_user.guest?

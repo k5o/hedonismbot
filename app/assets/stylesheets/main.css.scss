@@ -81,21 +81,26 @@ a {
   margin-bottom: 20px; 
 
   #show_title {
-    width: 90%;
+    width: 85%;
     padding: 10px;
     font-size: 1.4em;
   }
-  input[type=submit] {
-    background-color: #53B6CE;
-    color: #FBFCFC;
-    padding: 0.3em 0.4em;
-    font-size: 1.5em;
-    font-weight: 700;
-    border: 0;
-    border-radius: 100px;
-    &:hover {
-      cursor: pointer;
-      background-color: #F5B642;
+
+  a {
+    display: inline-block;
+    line-height: 15px;
+
+    i {
+      display: inline-block;
+      font-family: 'fontello';
+      color: #53B6CE;
+      font-size: 2.8em;
+      font-weight: 700;
+      border: 0;
+      &:hover {
+        cursor: pointer;
+        color: #F5B642;
+      }
     }
   }
 }
@@ -131,7 +136,6 @@ a {
 }
 
 strong {
-  
   font-size: 1.2em;
 }
 
@@ -265,4 +269,3 @@ span.stronger {
     }
   }
 }
-
