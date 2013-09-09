@@ -165,6 +165,23 @@ span.stronger {
     display: inline-block;
     background-color: #FBFCFC;
     height: 280px;
+    position: relative;
+
+    .icon-cancel-circled {
+      border-radius: 999px;
+      height: 0em;
+      width: 0em;
+      position: absolute;
+      top: -7px;
+      right: 12px;
+      color: #222;
+      font-size: 20px;
+      padding: 0;
+      &:hover {
+        cursor: pointer;
+        color: #EE2126;
+      }
+    }
   }
 
   h2 {

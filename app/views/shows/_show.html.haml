@@ -1,4 +1,7 @@
 %li
+  %span.delete
+    %a{controller: "trackings", action: "destroy", method: :delete}
+      %i.icon-cancel-circled 
   .show_view
     %a{href: "http://thepiratebay.sx/search/#{show.title}/0/99/0"}
       %img{src: show.banner, width: "420px"}
