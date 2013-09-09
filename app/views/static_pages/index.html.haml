@@ -7,9 +7,10 @@
         -flash.each do |name, msg|
           = content_tag :div, msg, :id => "flash_notice"
       #query
-        = form_tag(trackings_path, method: :post) do
+        = form_tag(trackings_path, method: :post, remote: true)  do
           = text_field_tag "show_title", "", { placeholder: "Try now: enter a show title, e.g. \"Game of Thrones\"", autofocus: true }
-          %a{controller: "trackings", action: "create", method: :post}
+          = submit_tag nil, { id: 'hidden_submit_button', style: 'display: none;' }
+          = link_to "", onclick: "$('#hidden_submit_button').click(); return false" do
             %i.icon-plus-circled
     #mid_wrapper
       #mid_links

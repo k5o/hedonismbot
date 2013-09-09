@@ -2,6 +2,7 @@ class TrackingsController < ApplicationController
   before_filter :load_imperatives
 
   def create
+    puts "create"
     @title = params[:show_title]
 
     if Show.show_available?(@title)
@@ -11,9 +12,19 @@ class TrackingsController < ApplicationController
       @show.save if @show.new_record?
 
       Show.create_show_data(@title, @canonical_title, @show.id) if @show.status.nil?
-      Tracking.create(:user_id => @user.id, :show_id => @show.id)
-      
-      redirect_to root_path
+
+      @tracking = Tracking.create(:user_id => @user.id, :show_id => @show.id)
+
+      puts "tracking"
+      puts @tracking.inspect
+
+      if @tracking.valid?
+        puts "1"
+        render 'success'
+      else
+        puts "2"
+        render 'error'
+      end
     else
       flash.now[:notice] = "Show not found!"
 
