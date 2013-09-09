@@ -12,9 +12,9 @@ def seeder(query, canonical_title)
 
   Show.create!({
     title:        canonical_title,
-    last_episode: latest_episode[/(\d+x\d+)/],
-    last_title:   latest_episode.match(/\^(.+)\^/).captures.first,
-    last_airdate: latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
+    last_episode: latest_episode.present? ? latest_episode[/(\d+x\d+)/] : nil,
+    last_title:   latest_episode.present? ? latest_episode.match(/\^(.+)\^/).captures.first : nil,
+    last_airdate: latest_episode.present? ? latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
     next_episode: next_episode.present? ? next_episode[/(\d+x\d+)/] : nil,
     next_title:   next_episode.present? ? next_episode.match(/\^(.+)\^/).captures.first : nil,
     next_airdate: next_episode.present? ? next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
@@ -51,6 +51,6 @@ seeder("Adventure Time", "Adventure Time")
 sleep 2
 seeder("Parks and Recreation", "Parks and Recreation")
 sleep 2
-seeder("Suits", "Suits")
+seeder("Cosmos: A Space-Time Odyssey", "Cosmos: A Space-Time Odyssey")
 sleep 2
 seeder("Top Gear", "Top Gear")

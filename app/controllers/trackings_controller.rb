@@ -1,8 +1,7 @@
 class TrackingsController < ApplicationController
-  before_filter :load_imperatives
+  before_filter :load_imperatives, except: [:destroy]
 
   def create
-    puts "create"
     @title = params[:show_title]
 
     if Show.show_available?(@title)
@@ -15,20 +14,15 @@ class TrackingsController < ApplicationController
 
       @tracking = Tracking.create(:user_id => @user.id, :show_id => @show.id)
 
-      puts "tracking"
       puts @tracking.inspect
 
       if @tracking.valid?
-        puts "1"
         render 'success'
       else
-        puts "2"
         render 'error'
       end
     else
-      flash.now[:notice] = "Show not found!"
-
-      render 'static_pages/index'
+      render 'error'
     end
   end
 
@@ -47,14 +41,5 @@ class TrackingsController < ApplicationController
       @user.save
       session[:user_id] = @user.id
     end
- 
-    @shows = @user.shows
-
-    @demo_shows = [Show.find_by_title("Game of Thrones"), 
-    Show.find_by_title("Futurama"),
-    Show.find_by_title("Adventure Time"),
-    Show.find_by_title("Parks and Recreation"),
-    Show.find_by_title("Suits"),
-    Show.find_by_title("Top Gear")]
   end
 end

@@ -8,7 +8,7 @@ class StaticPagesController < ApplicationController
       Show.find_by_title("Futurama"),
       Show.find_by_title("Adventure Time"),
       Show.find_by_title("Parks and Recreation"),
-      Show.find_by_title("Suits"),
+      Show.find_by_title("Cosmos: A Space-Time Odyssey"),
       Show.find_by_title("Top Gear")]
   end
 end

@@ -71,7 +71,7 @@ class Show < ActiveRecord::Base
 
       Show.find(show_id).update_attributes({
         title:        canonical_title,
-        last_episode: latest_episode.present ? latest_episode[/(\d+x\d+)/] : nil,
+        last_episode: latest_episode.present? ? latest_episode[/(\d+x\d+)/] : nil,
         last_title:   latest_episode.present? ? latest_episode.match(/\^(.+)\^/).captures.first : nil,
         last_airdate: latest_episode.present? ? latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
         next_episode: next_episode.present? ? next_episode[/(\d+x\d+)/] : nil,
