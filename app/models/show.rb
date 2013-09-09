@@ -6,12 +6,50 @@ class Show < ActiveRecord::Base
 
   attr_accessible :title, :last_episode, :last_title, :last_airdate, :next_episode, :next_title, :next_airdate, :status, :airtime, :banner
 
-  # Called by #batch_update_next_airdate!
-  def update_next_airdate!
+  scope :active?
 
+  def ended_statuses
+    ["Ended", "Canceled/Ended"]
+  end
+
+  def ended?
+    ended_statuses.include?(status)
+  end
+
+  # Called by #batch_update_next_airdate!
+  def update_inactive_data!
+    show_data = Show.check_for_show_data(title)
+
+    new_latest_episode = "" ; new_next_episode = "" ; new_status = "" ; new_airtime = ""
+
+    show_data.split("\n").each do |data|
+      new_latest_episode = data if data[/^Latest Episode/]
+      new_next_episode   = data if data[/^Next Episode/]
+      new_status         = data if data[/^Status/]
+      new_airtime        = data if data[/^Airtime/]
+    end
+
+    self.update_attributes({
+      last_episode: new_latest_episode.present? ? new_latest_episode[/(\d+x\d+)/] : nil,
+      last_title:   new_latest_episode.present? ? new_latest_episode.match(/\^(.+)\^/).captures.first : nil,
+      last_airdate: new_latest_episode.present? ? new_latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
+      next_episode: new_next_episode.present? ? new_next_episode[/(\d+x\d+)/] : nil,
+      next_title:   new_next_episode.present? ? new_next_episode.match(/\^(.+)\^/).captures.first : nil,
+      next_airdate: new_next_episode.present? ? new_next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
+      status:       new_status.match(/@(.+)$/).captures.first,
+      airtime:      new_airtime.present? ? new_airtime.match(/@(.+)$/).captures.first : nil
+    })
   end
 
   class << self
+    def active?
+      where("status IN(?)", active_statuses)
+    end
+
+    def active_statuses
+      ["Returning Series", "Final Season", "In Development"]
+    end
+
     def show_available?(query)
       canonical_title = check_for_show_data(query).match(/Show Name@(.+)\nShow URL{1}/)
 
@@ -33,9 +71,9 @@ class Show < ActiveRecord::Base
 
       Show.find(show_id).update_attributes({
         title:        canonical_title,
-        last_episode: latest_episode[/(\d+x\d+)/],
-        last_title:   latest_episode.match(/\^(.+)\^/).captures.first,
-        last_airdate: latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
+        last_episode: latest_episode.present ? latest_episode[/(\d+x\d+)/] : nil,
+        last_title:   latest_episode.present? ? latest_episode.match(/\^(.+)\^/).captures.first : nil,
+        last_airdate: latest_episode.present? ? latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
         next_episode: next_episode.present? ? next_episode[/(\d+x\d+)/] : nil,
         next_title:   next_episode.present? ? next_episode.match(/\^(.+)\^/).captures.first : nil,
         next_airdate: next_episode.present? ? next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
@@ -47,7 +85,7 @@ class Show < ActiveRecord::Base
 
     # To be called by a cron job to systematically update all recurring shows' next airdates
     def batch_update_next_airdate!
-      Show.where('next_air_date < ? AND status = ?', Time.now, 'Returning Series').each{ |show| show.update_next_air_date!}
+      Show.active?.where('next_airdate < ? OR next_airdate IS NULL', DateTime.now).each{ |show| show.update_inactive_data!}
     end
 
     def check_for_show_data(query)
