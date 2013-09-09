@@ -30,7 +30,7 @@
     #shows
       - if @shows.empty?
         %h2 Sample cards:
-        = render partial: "shows/show", collection: @demo_shows
+        = render partial: "shows/show", :locals => { :demo_view => true }, collection: @demo_shows
       - else
         %h2 Your Tracked Shows:
         %p#logged_in_as
