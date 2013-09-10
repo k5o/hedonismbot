@@ -1,0 +1,8 @@
+%h2 Your Tracked Shows:
+%p#logged_in_as
+  = "Logged in as #{current_user.name}."
+  - if current_user.guest?
+    = link_to "Sign up", '#', {id: 'scroll_to_signup', class: 'signup_link'}
+    = "to save your shows."
+#user_shows    
+  = render @shows

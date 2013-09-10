@@ -1,1 +1,2 @@
-$('#shows').prepend('<%= escape_javascript(render @show) %>')
+$('#shows').html("<%= escape_javascript(render 'user_shows') %>")
+$('#show_title').val("")

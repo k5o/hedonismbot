@@ -34,10 +34,5 @@
         = render partial: "shows/show", :locals => { :demo_view => true }, collection: @demo_shows
       - else
         %h2 Your Tracked Shows:
-        %p#logged_in_as
-          = "Logged in as #{current_user.name}."
-          - if current_user.guest?
-            = link_to "Sign up", '#', {id: 'scroll_to_signup', class: 'signup_link'}
-            = "to save your shows."
-        = render @shows
+        = render partial: "trackings/user_shows"
   .footer

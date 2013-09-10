@@ -41,5 +41,7 @@ class TrackingsController < ApplicationController
       @user.save
       session[:user_id] = @user.id
     end
+
+    @shows = @user.shows
   end
 end
