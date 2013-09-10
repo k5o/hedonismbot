@@ -34,7 +34,7 @@
     #shows
       - if @trackings.empty?
         %h2 Sample cards:
-        = render partial: "trackings/tracking", :locals => { :demo_view => true }, collection: @demo_trackings
+        = render partial: "shows/show", collection: @demo_shows
       - else
         = render partial: "trackings/user_shows"
   .footer

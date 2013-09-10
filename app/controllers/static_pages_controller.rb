@@ -4,7 +4,7 @@ class StaticPagesController < ApplicationController
 
     @trackings = @user.trackings.includes(:show)
 
-    @demo_trackings = [Show.find_by_title("Game of Thrones"), 
+    @demo_shows = [Show.find_by_title("Game of Thrones"), 
       Show.find_by_title("Futurama"),
       Show.find_by_title("Adventure Time"),
       Show.find_by_title("Parks and Recreation"),

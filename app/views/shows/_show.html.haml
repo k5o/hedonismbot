@@ -1,8 +1,4 @@
 %li
-  - unless defined?(demo_view) && demo_view
-    %span.delete
-      = link_to tracking_path(Tracking.find_by_user_id_and_show_id(current_user.id, show.id)), method: :delete, class: "delete_tracking", remote: true do 
-        %i.icon-cancel-circled 
   .show_view
     %a{href: "http://thepiratebay.sx/search/#{show.title}/0/99/0"}
       %img{src: show.banner, width: "420px"}
