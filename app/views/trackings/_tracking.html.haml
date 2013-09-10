@@ -3,9 +3,8 @@
     = link_to tracking_path(tracking), method: :delete, class: "delete_tracking", remote: true do 
       %i.icon-cancel-circled 
   .show_view
-    %a{href: "http://thepiratebay.sx/search/#{tracking.show.title}/0/99/0"}
-      %img{src: tracking.show.banner, width: "420px"}
-      .title= tracking.show.title
+    %img{src: tracking.show.banner, width: "420px"}
+    .title= tracking.show.title
     - if tracking.show.ended?
       %p.ended= "Show has ended."
     - else

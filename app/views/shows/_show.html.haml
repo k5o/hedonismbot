@@ -1,8 +1,7 @@
 %li
   .show_view
-    %a{href: "http://thepiratebay.sx/search/#{show.title}/0/99/0"}
-      %img{src: show.banner, width: "420px"}
-      .title= show.title
+    %img{src: show.banner, width: "420px"}
+    .title= show.title
     - if show.ended?
       %p.ended= "Show has ended."
     - else
