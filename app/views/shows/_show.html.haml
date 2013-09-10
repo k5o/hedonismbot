@@ -6,6 +6,7 @@
   .show_view
     %a{href: "http://thepiratebay.sx/search/#{show.title}/0/99/0"}
       %img{src: show.banner, width: "420px"}
+      .title= show.title
     - if show.ended?
       %p.ended= "Show has ended."
     - else
@@ -20,6 +21,6 @@
           = show.next_episode ? "Episode: #{show.next_episode} - \"#{show.next_title}\"" : "Episode: N/A"
     .last
       %p
-        %span.stronger= show.last_airdate ? "Last Air Date: #{show.last_airdate.strftime("%m-%d-%Y")}" : "Last Air Date: N/A"
+        %span.stronger= show.last_airdate ? "Last Air Date: #{show.last_airdate.strftime("%m-%d-%Y")}" : "Last Air Date: Show in Development"
         %br
-        = "Episode: #{show.last_episode} - \"#{show.last_title}\""
+        = show.last_episode ? "Episode: #{show.last_episode} - \"#{show.last_title}\"" : "Episode: N/A"
