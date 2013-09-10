@@ -47,6 +47,6 @@ class TrackingsController < ApplicationController
       session[:user_id] = @user.id
     end
 
-    @shows = @user.shows
+    @trackings = @user.trackings.includes(&:shows)
   end
 end

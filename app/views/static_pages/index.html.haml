@@ -32,9 +32,9 @@
           = render partial: "partials/help"
   .content
     #shows
-      - if @shows.empty?
+      - if @trackings.empty?
         %h2 Sample cards:
-        = render partial: "shows/show", :locals => { :demo_view => true }, collection: @demo_shows
+        = render partial: "trackings/tracking", :locals => { :demo_view => true }, collection: @demo_trackings
       - else
         = render partial: "trackings/user_shows"
   .footer

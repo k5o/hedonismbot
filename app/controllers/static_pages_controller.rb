@@ -2,9 +2,9 @@ class StaticPagesController < ApplicationController
   def index
     current_user ? @user = User.find(current_user.id) : @user = User.new
 
-    @shows = @user.shows
+    @trackings = @user.trackings.includes(&:shows)
 
-    @demo_shows = [Show.find_by_title("Game of Thrones"), 
+    @demo_trackings = [Show.find_by_title("Game of Thrones"), 
       Show.find_by_title("Futurama"),
       Show.find_by_title("Adventure Time"),
       Show.find_by_title("Parks and Recreation"),

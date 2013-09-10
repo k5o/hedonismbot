@@ -1,0 +1,26 @@
+%li
+  - unless defined?(demo_view) && demo_view
+    %span.delete
+      = link_to tracking_path(tracking), method: :delete, class: "delete_tracking", remote: true do 
+        %i.icon-cancel-circled 
+  .show_view
+    %a{href: "http://thepiratebay.sx/search/#{tracking.show.title}/0/99/0"}
+      %img{src: tracking.show.banner, width: "420px"}
+      .title= tracking.show.title
+    - if tracking.show.ended?
+      %p.ended= "Show has ended."
+    - else
+      .next
+        %p
+          %strong
+            = precede 'Next Air Date: ' do
+              %span.next_date= tracking.show.next_airdate ? "#{tracking.show.next_airdate.strftime("%m-%d-%Y")}" : "N/A"
+          %br
+          = tracking.show.airtime ? "Air Time: #{tracking.show.airtime}" : "Air Time: N/A"
+          %br
+          = tracking.show.next_episode ? "Episode: #{tracking.show.next_episode} - \"#{tracking.show.next_title}\"" : "Episode: N/A"
+    .last
+      %p
+        %span.stronger= tracking.show.last_airdate ? "Last Air Date: #{tracking.show.last_airdate.strftime("%m-%d-%Y")}" : "Last Air Date: Show in Development"
+        %br
+        = tracking.show.last_episode ? "Episode: #{tracking.show.last_episode} - \"#{tracking.show.last_title}\"" : "Episode: N/A"
