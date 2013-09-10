@@ -8,11 +8,10 @@ class UsersController < ApplicationController
     if @user.save
       current_user.move_to(@user) if current_user && current_user.guest?
       session[:user_id] = @user.id
-      flash[:notice] = "Signed up!"
-      redirect_to root_url
+      redirect_to root_path
     else
-      flash[:alert] = "Something went wrong, please try again."
-      redirect_to root_url
+      flash[:error] = "Signup error, check your e-mail and try again."
+      redirect_to root_path
     end
   end
 

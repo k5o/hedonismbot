@@ -51,9 +51,9 @@ class Show < ActiveRecord::Base
     end
 
     def show_available?(query)
-      canonical_title = check_for_show_data(query).match(/Show Name@(.+)\nShow URL{1}/)
+      canonical_title = check_for_show_data(query)
 
-      canonical_title.present? ? canonical_title.captures.first : false 
+      canonical_title.present? ? canonical_title.match(/Show Name@(.+)\nShow URL{1}/).captures.first : false 
     end
 
     def create_show_data(query, canonical_title, show_id)

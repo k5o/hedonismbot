@@ -1,3 +1,5 @@
-$('#shows').html("<%= escape_javascript(render 'user_shows') %>")
+$('#shows').html("<%= escape_javascript(render 'trackings/user_shows') %>")
 $('#query_submit').html("<%= escape_javascript(render 'partials/query_submit_button') %>")
+$('.error_block').html("");
+$('.error_block').removeClass();
 $('#show_title').val("")

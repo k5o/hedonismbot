@@ -1,4 +1,14 @@
 $(document).ready(function () {
+  $('#signup').on('click', '#signup_button', function(e){
+    $('.error_block').html("");
+    $('.error_block').removeClass();
+  });
+
+  $('#login').on('click', '#login_button', function(e){
+    $('.error_block').html("");
+    $('.error_block').removeClass();
+  });
+
   $('.wrapper').on('click', '#about_link', function(e){
     e.preventDefault();
     $('#signup').css("display", "none");

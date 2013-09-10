@@ -44,6 +44,7 @@ a {
   margin: auto;
   max-width: 720px; 
   color: #FBFCFC;
+  padding-bottom: 20px;
 
   #header {
     margin: 0;
@@ -60,25 +61,27 @@ a {
     font-size: 1.2em;
     font-weight: 400;
   }
+}
 
-  #flash_notice {
-    @include box-sizing();
-    text-align: center;
-    margin: auto;
-    color: #EE2126;
-    width: 100%;
-    padding: 0.5em 1em 0.5em 1em;
-    background-color: #F19D9C;
-    border: 2px solid #EE2126;
-    border-radius: 5px;
-    margin-bottom: 10px;
+.error_block {
+  display: block;
+  text-align: center;
+  margin: auto;
+  margin-top: 8px;
+  color: #EE2126;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #ddd;
+  border: 2px solid #EE2126;
+  border-radius: 5px;
+  font-size: 0.9em;
+  li {
+    list-style: none;
   }
 }
 
 #query {
   margin: auto;
   text-align: center;
-  margin-bottom: 20px; 
 
   #show_title {
     width: 85%;
@@ -121,7 +124,7 @@ a {
     max-width: 720px;
     margin: auto;
     display: block;
-    padding: 20px 0px;
+    padding: 20px 0px 0px 0px;
     text-align: center !important;
 
     li {
@@ -230,6 +233,7 @@ span.stronger {
   margin: auto;
   display: block;
   max-width: 720px;
+  padding-bottom: 20px;
 
   #about {
     display: none;
