@@ -1,0 +1,3 @@
+var cardToRemove = "a.delete_tracking[href='/trackings/" + <%= @id %> + "']"
+
+$(cardToRemove).parent().parent().fadeOut(400);

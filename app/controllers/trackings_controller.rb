@@ -4,7 +4,13 @@ class TrackingsController < ApplicationController
   def create
     @title = params[:show_title]
 
-    if Show.show_available?(@title)
+    @show = Show.find_by_title(@title)
+
+    if @show
+      @tracking = Tracking.create(:user_id => @user.id, :show_id => @show.id)
+      render 'success'
+
+    elsif Show.show_available?(@title)
       @canonical_title = Show.show_available?(@title)
       @show            = Show.find_or_initialize_by_title(@canonical_title)
 
@@ -14,21 +20,21 @@ class TrackingsController < ApplicationController
 
       @tracking = Tracking.create(:user_id => @user.id, :show_id => @show.id)
 
-      puts @tracking.inspect
-
       if @tracking.valid?
         render 'success'
       else
         render 'error'
       end
+
     else
       render 'error'
     end
   end
 
   def destroy
-    Tracking.find(params[:id]).destroy
-    render :json => {}
+    @id = params[:id]
+    Tracking.find(@id).destroy
+    render 'destroy_success'
   end
 
   private
