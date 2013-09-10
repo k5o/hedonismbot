@@ -3,8 +3,7 @@ class TrackingsController < ApplicationController
 
   def create
     @title = params[:show_title]
-
-    @show = Show.find_by_title(@title)
+    @show = Show.find_by_title(@title.titleize)
 
     if @show
       @tracking = Tracking.create(:user_id => @user.id, :show_id => @show.id)
