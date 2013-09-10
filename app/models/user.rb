@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :trackings, :order => 'trackings.created_at DESC'
-  has_many :shows
+  has_many :shows, through: :trackings
   has_secure_password
   before_save :encrypt_password
 
