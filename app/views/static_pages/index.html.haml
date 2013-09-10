@@ -2,7 +2,7 @@
   .wrapper
     .heading
       %h1#header HedonismBot
-      %h2#subheader Track the shows you're currently watching, allowing you to see at-a-glance when the next episode or season will air. No more Wikipedia/IMDB digging!
+      %h2#subheader Track TV shows to see when the next episode or season will air.
       #query
         = form_tag(trackings_path, method: :post, remote: true, id: "query_form_tag")  do
           = text_field_tag "show_title", "", { placeholder: "Try now: enter a show title, e.g. \"Game of Thrones\"", autofocus: true, required: "required" }
