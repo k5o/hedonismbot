@@ -159,6 +159,11 @@ span.stronger {
   font-family: 'PT Sans';
   font-weight: 400;
 
+  img {
+    width: 420px;
+    height: 78px;
+  }
+
   li {
     @include box-sizing();
     float: left;
@@ -257,6 +262,7 @@ span.stronger {
       max-width: 384px;
       display: inline-block;
       padding: 12px;
+      font-family: "PT Sans";
     }
 
     #youtube {
@@ -274,6 +280,11 @@ span.stronger {
   
   #help{
     text-align: left !important;
+    font-size: 1em;
+    margin: 0;
+    width: 100%;
+    padding: 12px;
+    font-family: "PT Sans";
   }
 
   input[type=text], input[type=password] {
@@ -282,6 +293,7 @@ span.stronger {
     font-size: 1.2em;
     font-family: "Open Sans";
     border: 1px;
+    margin-bottom: 5px;
   }
 
   input[type=submit] {
