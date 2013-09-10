@@ -237,7 +237,6 @@ span.stronger {
 
   #about {
     display: none;
-    padding-bottom: 1em;
 
     #about_blurb {
       @include box-sizing();
@@ -257,11 +256,14 @@ span.stronger {
     }
   }
 
-  #signup, #login {
+  #signup, #login, #help {
     display: none;
     text-align: center;
     padding: 2%;
-    padding-bottom: 1em;
+  }
+  
+  #help{
+    text-align: left !important;
   }
 
   input[type=text], input[type=password] {

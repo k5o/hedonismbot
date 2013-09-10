@@ -18,6 +18,7 @@
         - else
           %li= link_to "Logout", logout_path
         %li= link_to "About", '#', {id: 'about_link'}
+        %li= link_to "Help", '#', {id: 'help_link'}
       #popin
         - flash.each do |name, msg|
           = content_tag :div, msg, class: 'error_block'
@@ -27,6 +28,8 @@
           = render partial: "partials/login" 
         #about
           = render partial: "partials/about" 
+        #help
+          = render partial: "partials/help"
   .content
     #shows
       - if @shows.empty?

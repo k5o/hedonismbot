@@ -13,13 +13,23 @@ $(document).ready(function () {
     e.preventDefault();
     $('#signup').css("display", "none");
     $('#login').css("display", "none");
+    $('#help').css("display", "none");
     $('#about').toggle(300);
+  });  
+
+  $('.wrapper').on('click', '#help_link', function(e){
+    e.preventDefault();
+    $('#signup').css("display", "none");
+    $('#login').css("display", "none");
+    $('#about').css("display", "none");
+    $('#help').toggle(300);
   });
 
   $('.container').on('click', '.signup_link', function(e){
     e.preventDefault();
     $('#about').css("display", "none");
     $('#login').css("display", "none");
+    $('#help').css("display", "none");
     $('#signup').toggle(300);
   });
 
@@ -27,6 +37,7 @@ $(document).ready(function () {
     e.preventDefault();
     $('#about').css("display", "none");
     $('#signup').css("display", "none");
+    $('#help').css("display", "none");
     $('#login').toggle(300);
   });
 
