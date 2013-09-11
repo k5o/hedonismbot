@@ -1,40 +1,39 @@
-.container
-  .wrapper
-    .heading
-      %h1#header HedonismBot
-      %h2#subheader Track TV shows to see when the next episode or season will air.
-      #query
-        = form_tag(trackings_path, method: :post, remote: true, id: "query_form_tag")  do
-          = text_field_tag "show_title", "", { placeholder: "Try now: enter a show title, e.g. \"Game of Thrones\"", autofocus: true, required: "required" }
-          = submit_tag nil, { id: 'hidden_submit_button', style: 'display: none;' }
-          %span#query_submit
-            = render "partials/query_submit_button"
-        #errors
-    #mid_wrapper
-      #mid_links
-        - if current_user.nil? || current_user.guest?
-          %li= link_to "Signup", '#', {class: 'signup_link'}
-          %li= link_to "Login", '#', {id: 'login_link'}
-        - else
-          %li= link_to "Logout", logout_path
-        %li= link_to "About", '#', {id: 'about_link'}
-        %li= link_to "Help", '#', {id: 'help_link'}
-      #popin
-        - flash.each do |name, msg|
-          = content_tag :div, msg, class: 'error_block'
-        #signup
-          = render partial: "partials/signup" 
-        #login
-          = render partial: "partials/login" 
-        #about
-          = render partial: "partials/about" 
-        #help
-          = render partial: "partials/help"
-  .content
-    #shows
-      - if @trackings.empty?
-        %h2 Sample cards:
-        = render partial: "shows/show", collection: @demo_shows
+.wrapper
+  .heading
+    %h1#header HedonismBot
+    %h2#subheader Track TV shows to see when the next episode or season will air.
+    #query
+      = form_tag(trackings_path, method: :post, remote: true, id: "query_form_tag")  do
+        = text_field_tag "show_title", "", { placeholder: "Try now: enter a show title, e.g. \"Game of Thrones\"", autofocus: true, required: "required" }
+        = submit_tag nil, { id: 'hidden_submit_button', style: 'display: none;' }
+        %span#query_submit
+          = render "partials/query_submit_button"
+      #errors
+  #mid_wrapper
+    #mid_links
+      - if current_user.nil? || current_user.guest?
+        %li= link_to "Signup", '#', {class: 'signup_link'}
+        %li= link_to "Login", '#', {id: 'login_link'}
       - else
-        = render partial: "trackings/user_shows"
-  .footer
+        %li= link_to "Logout", logout_path
+      %li= link_to "About", '#', {id: 'about_link'}
+      %li= link_to "Help", '#', {id: 'help_link'}
+    #popin
+      - flash.each do |name, msg|
+        = content_tag :div, msg, class: 'error_block'
+      #signup
+        = render partial: "partials/signup" 
+      #login
+        = render partial: "partials/login" 
+      #about
+        = render partial: "partials/about" 
+      #help
+        = render partial: "partials/help"
+.content
+  #shows
+    - if @trackings.empty?
+      %h2 Sample cards:
+      = render partial: "shows/show", collection: @demo_shows
+    - else
+      = render partial: "trackings/user_shows"
+.footer
