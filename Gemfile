@@ -19,4 +19,5 @@ end
 group :test do
   gem 'mocha', :require => false
   gem 'shoulda'
+  gem 'factory_girl'
 end
