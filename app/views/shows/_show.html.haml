@@ -9,13 +9,13 @@
         %p
           %strong
             = precede 'Next Air Date: ' do 
-              %span.next_date= date_presenter_for_next_airdate(tracking.show.next_airdate)
+              %span.next_date= date_presenter_for_next_airdate(show.next_airdate)
           %br
-          = tracking.show.airtime ? "Air Time: #{tracking.show.airtime}" : "Air Time: N/A"
+          = show.airtime ? "Air Time: #{show.airtime}" : "Air Time: N/A"
           %br
-          = tracking.show.next_episode ? "Episode: #{tracking.show.next_episode} - \"#{tracking.show.next_title}\"" : "Episode: N/A"
+          = show.next_episode ? "Episode: #{show.next_episode} - \"#{show.next_title}\"" : "Episode: N/A"
     .last
       %p
-        %span.stronger= "Last Air Date: #{date_presenter_for_last_airdate(tracking.show.last_airdate)}"
+        %span.stronger= "Last Air Date: #{date_presenter_for_last_airdate(show.last_airdate)}"
         %br
-        = tracking.show.last_episode ? "Episode: #{tracking.show.last_episode} - \"#{tracking.show.last_title}\"" : "Episode: N/A"
+        = show.last_episode ? "Episode: #{show.last_episode} - \"#{show.last_title}\"" : "Episode: N/A"
