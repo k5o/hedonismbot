@@ -20,24 +20,24 @@ class Show < ActiveRecord::Base
   def update_inactive_data!
     show_data = Show.check_for_show_data(title)
 
-    new_latest_episode = "" ; new_next_episode = "" ; new_status = "" ; new_airtime = ""
+    latest_episode = next_episode = status = airtime = nil
 
     show_data.split("\n").each do |data|
-      new_latest_episode = data if data[/^Latest Episode/]
-      new_next_episode   = data if data[/^Next Episode/]
-      new_status         = data if data[/^Status/]
-      new_airtime        = data if data[/^Airtime/]
+      latest_episode = data if data[/^Latest Episode/]
+      next_episode   = data if data[/^Next Episode/]
+      status         = data if data[/^Status/]
+      airtime        = data if data[/^Airtime/]
     end
 
     self.update_attributes({
-      last_episode: new_latest_episode.present? ? new_latest_episode[/(\d+x\d+)/] : nil,
-      last_title:   new_latest_episode.present? ? new_latest_episode.match(/\^(.+)\^/).captures.first : nil,
-      last_airdate: new_latest_episode.present? ? new_latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
-      next_episode: new_next_episode.present? ? new_next_episode[/(\d+x\d+)/] : nil,
-      next_title:   new_next_episode.present? ? new_next_episode.match(/\^(.+)\^/).captures.first : nil,
-      next_airdate: new_next_episode.present? ? new_next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
-      status:       new_status.match(/@(.+)$/).captures.first,
-      airtime:      new_airtime.present? ? new_airtime.match(/@(.+)$/).captures.first : nil
+      last_episode: latest_episode && latest_episode[/(\d+x\d+)/],
+      last_title:   latest_episode && latest_episode.match(/\^(.+)\^/).captures.first,
+      last_airdate: latest_episode && latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
+      next_episode: next_episode && next_episode[/(\d+x\d+)/],
+      next_title:   next_episode && next_episode.match(/\^(.+)\^/).captures.first,
+      next_airdate: next_episode && next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
+      status:       status.match(/@(.+)$/).captures.first,
+      airtime:      airtime && airtime.match(/@(.+)$/).captures.first,
     })
   end
 
@@ -47,7 +47,7 @@ class Show < ActiveRecord::Base
     end
 
     def active_statuses
-      ["Returning Series", "Final Season", "In Development"]
+      ["Returning Series", "Final Season", "In Development", "TBD/On The Bubble"]
     end
 
     def show_available?(query)
@@ -58,9 +58,9 @@ class Show < ActiveRecord::Base
 
     def create_show_data(query, canonical_title, show_id)
       show_data = check_for_show_data(canonical_title)
-      raise ShowNotFound unless show_data
+      return false unless show_data
 
-      latest_episode = "" ; next_episode = "" ; status = "" ; airtime = ""
+      latest_episode = next_episode = status = airtime = nil
 
       show_data.split("\n").each do |data|
         latest_episode = data if data[/^Latest Episode/]
@@ -71,14 +71,14 @@ class Show < ActiveRecord::Base
 
       Show.find(show_id).update_attributes({
         title:        canonical_title,
-        last_episode: latest_episode.present? ? latest_episode[/(\d+x\d+)/] : nil,
-        last_title:   latest_episode.present? ? latest_episode.match(/\^(.+)\^/).captures.first : nil,
-        last_airdate: latest_episode.present? ? latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
-        next_episode: next_episode.present? ? next_episode[/(\d+x\d+)/] : nil,
-        next_title:   next_episode.present? ? next_episode.match(/\^(.+)\^/).captures.first : nil,
-        next_airdate: next_episode.present? ? next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first : nil,
+        last_episode: latest_episode && latest_episode[/(\d+x\d+)/],
+        last_title:   latest_episode && latest_episode.match(/\^(.+)\^/).captures.first,
+        last_airdate: latest_episode && latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
+        next_episode: next_episode && next_episode[/(\d+x\d+)/],
+        next_title:   next_episode && next_episode.match(/\^(.+)\^/).captures.first,
+        next_airdate: next_episode && next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
         status:       status.match(/@(.+)$/).captures.first,
-        airtime:      airtime.present? ? airtime.match(/@(.+)$/).captures.first : nil,
+        airtime:      airtime && airtime.match(/@(.+)$/).captures.first,
         banner:       fetch_show_banner(query, canonical_title)
       })
     end
@@ -95,7 +95,7 @@ class Show < ActiveRecord::Base
     end
 
     def fetch_show_banner(query, canonical_title)
-      tvdb   = TvdbParty::Search.new(Figaro.env.tvdb_api_key)
+      tvdb = TvdbParty::Search.new(Figaro.env.tvdb_api_key)
 
       begin
         show   = tvdb.get_series_by_id(tvdb.search(canonical_title).first["seriesid"])
@@ -104,7 +104,8 @@ class Show < ActiveRecord::Base
       rescue NoMethodError
         banner = "#{Rails.root.join('app', 'assets', 'images', '404banner.jpg')}"
       end
-        show ? show.series_banners('en').first.url : banner
+
+      show ? show.series_banners('en').first.url : banner
     end
   end
 end
