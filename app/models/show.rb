@@ -35,10 +35,14 @@ class Show < ActiveRecord::Base
       last_airdate: latest_episode && latest_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
       next_episode: next_episode && next_episode[/(\d+x\d+)/],
       next_title:   next_episode && next_episode.match(/\^(.+)\^/).captures.first,
-      next_airdate: next_episode && next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
+      next_airdate: next_episode && valid_date_format?(next_episode) && next_episode.match(/\^(\D{3}\/\d{2}\/\d{4})$/).captures.first,
       status:       status.match(/@(.+)$/).captures.first,
       airtime:      airtime && airtime.match(/@(.+)$/).captures.first,
     })
+  end
+
+  def valid_date_format?(string)
+    string.match(/\^(\D{3}\/\d{2}\/\d{4})$/)
   end
 
   class << self
