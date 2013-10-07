@@ -6,7 +6,8 @@
     %img{src: tracking.show.banner, width: "420px"}
     .title= tracking.show.title
     - if tracking.show.ended?
-      %p.ended= "Show has ended."
+      %p.ended Show has ended.
+      = link_to "Is this incorrect?", resurrect_path(tracking.show), method: 'post', class: "resurrect_link" 
     - else
       .next
         %p
@@ -14,9 +15,9 @@
             = precede 'Next Air Date: ' do 
               %span.next_date= date_presenter_for_next_airdate(tracking.show.next_airdate)
           %br
-          = tracking.show.airtime ? "Air Time: #{tracking.show.airtime}" : "Air Time: N/A"
+          %span.stronger= tracking.show.next_episode ? "Episode: #{tracking.show.next_episode} - \"#{tracking.show.next_title}\"" : "Episode: N/A"
           %br
-          = tracking.show.next_episode ? "Episode: #{tracking.show.next_episode} - \"#{tracking.show.next_title}\"" : "Episode: N/A"
+          = tracking.show.airtime ? "Air Time: #{tracking.show.airtime}" : "Air Time: N/A"
     .last
       %p
         %span.stronger= "Last Air Date: #{date_presenter_for_last_airdate(tracking.show.last_airdate)}"

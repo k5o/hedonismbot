@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  font-family: "Open Sans";
+  font-family: "Oxygen";
   font-weight: 300;
   margin: 0;
   background-color: #FBFCFC;
@@ -43,18 +43,21 @@ a {
 .heading {
   margin: auto;
   max-width: 720px; 
-  color: #FBFCFC;
+  color: #fff;
   padding-bottom: 20px;
 
   #header {
     margin: 0;
-    padding: 2.8em 1em 0em 1em;
-    font-size: 2.8em;
-    font-weight: 700;
+    padding: 1.6em 1em 0em 1em;
+    font-size: 3.8em;
+    font-weight: 300;
     text-align: center;
+    font-family: 'Open Sans';
+    /*letter-spacing: -1px;*/
   }
 
   #subheader {
+    font-family: 'Arvo';
     text-align: center;
     margin: 0;
     padding: 0 1em 20px 1em;
@@ -88,6 +91,7 @@ a {
     width: 85%;
     padding: 10px;
     font-size: 1.4em;
+    font-family: "Arvo";
   }
 
   a {
@@ -97,13 +101,13 @@ a {
     i {
       display: inline-block;
       font-family: 'fontello';
-      color: #53B6CE;
+      color: #F5B642;
       font-size: 2.8em;
       font-weight: 700;
       border: 0;
       &:hover {
         cursor: pointer;
-        color: #F5B642;
+        color: #DBA33B;
       }
     }
   }
@@ -140,15 +144,17 @@ a {
 }
 
 strong {
-  font-size: 1.2em;
+  font-size: 1.1em;
+  font-family: "Arvo";
+  font-weight: 700;
 }
 
-span.stronger {
+.stronger {
   font-weight: 700;
 }
 
 .next_date {
-  color: #E76E49;
+  color: #00A6D6;
 }
 
 #shows {
@@ -156,8 +162,9 @@ span.stronger {
   width: 100%;
   max-width: 960px;
   display: block;
-  font-family: 'PT Sans';
-  font-weight: 400;
+  font-family: 'Oxygen';
+  font-weight: 300;
+  font-size: 1em;
 
   img {
     width: 420px;
@@ -222,14 +229,20 @@ span.stronger {
   }
 
   .last {
-    font-size: 1em;
+    font-size: 0.9em;
+    color: #777;
   }
 
   .ended {
-    margin-top: 0;
-    font-weight: 700;
+    margin: 0;
+    font-weight: 400;
     font-size: 1.2em;
     color: #EE2126;
+    font-family: 'Arvo';
+  }
+
+  .resurrect_link {
+    font-size: 0.8em;
   }
 
   .title {
@@ -279,7 +292,7 @@ span.stronger {
     padding: 2%;
   }
   
-  #help{
+  #help {
     text-align: left !important;
     font-size: 1em;
     margin: 0;

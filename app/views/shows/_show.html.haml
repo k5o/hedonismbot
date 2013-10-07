@@ -11,9 +11,9 @@
             = precede 'Next Air Date: ' do 
               %span.next_date= date_presenter_for_next_airdate(show.next_airdate)
           %br
-          = show.airtime ? "Air Time: #{show.airtime}" : "Air Time: N/A"
+          %span.stronger= show.next_episode ? "Episode: #{show.next_episode} - \"#{show.next_title}\"" : "Episode: N/A"
           %br
-          = show.next_episode ? "Episode: #{show.next_episode} - \"#{show.next_title}\"" : "Episode: N/A"
+          = show.airtime ? "Air Time: #{show.airtime}" : "Air Time: N/A"
     .last
       %p
         %span.stronger= "Last Air Date: #{date_presenter_for_last_airdate(show.last_airdate)}"
