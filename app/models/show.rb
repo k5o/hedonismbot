@@ -45,6 +45,18 @@ class Show < ActiveRecord::Base
     string.match(/\^(\D{3}\/\d{2}\/\d{4})$/)
   end
 
+  # Sometimes a show may be canceled but then brought back. Users can manually resurrect those shows here,
+  # because cron will not in its current form.
+  def resurrect
+    show_data = Show.check_for_show_data(title)
+    new_show_status = nil
+    show_data.split("\n").each {|data| new_show_status = data.match(/@(.+)$/).captures.first if data[/^Status/] }
+
+    return false if self.status == new_show_status
+
+    self.update_inactive_data!
+  end
+
   class << self
     def active?
       where("status IN(?)", active_statuses)
