@@ -182,6 +182,8 @@ strong {
     background-color: #FBFCFC;
     height: 280px;
     position: relative;
+    text-align: left;
+
 
     .icon-cancel-circled {
       border-radius: 999px;
@@ -328,3 +330,13 @@ strong {
     }
   }
 }
+
+@media all and (max-width: 934px){
+  #shows {
+    text-align: center;
+    li {
+      float: none;
+    }
+  }
+}
+
