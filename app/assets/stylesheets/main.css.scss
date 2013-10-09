@@ -41,6 +41,7 @@ a {
 }
 
 .heading {
+  width: 100%;
   margin: auto;
   max-width: 720px; 
   color: #fff;
@@ -53,7 +54,6 @@ a {
     font-weight: 300;
     text-align: center;
     font-family: 'Open Sans';
-    /*letter-spacing: -1px;*/
   }
 
   #subheader {
@@ -86,12 +86,20 @@ a {
 #query {
   margin: auto;
   text-align: center;
+  position: relative;
 
   #show_title {
     width: 85%;
+    max-width: 636px;
     padding: 10px;
     font-size: 1.4em;
     font-family: "Arvo";
+  }
+
+  #query_submit {
+    position: absolute;
+    top: 20px;
+    right: -4px;
   }
 
   a {
@@ -151,6 +159,10 @@ strong {
 
 .stronger {
   font-weight: 700;
+}
+
+.serif {
+  font-family: "Arvo";
 }
 
 .next_date {
@@ -337,6 +349,52 @@ strong {
     li {
       float: none;
     }
+  }
+}
+
+@media all and (min-width: 800px) and (max-width: 1099px){
+  body{
+    font-size: 90% !important
+  }
+
+  #query_submit {
+    right: 0;
+  }
+}
+
+@media all and (min-width: 500px) and (max-width: 799px){
+  body{
+    font-size: 80% !important
+  }
+
+  #query_submit {
+    right: 4px;
+  }
+}
+
+@media all and (min-width: 100px) and (max-width: 499px){
+  body{
+    font-size: 70% !important
+  }
+
+  #shows img {
+    width: 340px;
+    height: 63px;
+  }
+
+  #shows li {
+    height: 200px;
+    width: 360px;
+  }
+
+  #show_title {
+    width: 70% !important;
+    font-size: 1.2em !important;
+  }
+
+  #query_submit {
+    top: 15px !important;
+    right: 12px !important;
   }
 }
 

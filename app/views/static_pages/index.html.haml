@@ -1,6 +1,8 @@
 .wrapper
   .heading
-    %h1#header HedonismBot
+    %h1#header 
+      = precede 'Hedonism' do
+        %span.stronger.serif Bot
     %h2#subheader Track TV shows to see when the next episode or season will air.
     #query
       = form_tag(trackings_path, method: :post, remote: true, id: "query_form_tag")  do
