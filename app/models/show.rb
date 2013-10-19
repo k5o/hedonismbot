@@ -63,7 +63,7 @@ class Show < ActiveRecord::Base
     end
 
     def active_statuses
-      ["Returning Series", "Final Season", "In Development", "TBD/On The Bubble"]
+      ["Returning Series", "Final Season", "In Development", "TBD/On The Bubble", "New Series"]
     end
 
     def show_available?(query)
