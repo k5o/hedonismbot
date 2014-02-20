@@ -18,6 +18,8 @@ body {
   min-height: 100% !important;
   height: 100%;
   color: #222;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
