@@ -1,0 +1,354 @@
+@charset "UTF-8";/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
+@font-face {
+  font-family: 'fontello';
+  src: url("../assets/fontello.eot?44978377");
+  src: url("../assets/fontello.eot?44978377#iefix") format("embedded-opentype"), url("../assets/fontello.woff?44978377") format("woff"), url("../assets/fontello.ttf?44978377") format("truetype"), url("../assets/fontello.svg?44978377#fontello") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?75209835#fontello') format('svg');
+  }
+}
+*/
+[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "fontello";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none; }
+
+.icon-cancel-circled:before {
+  content: '\e804'; }
+
+/* '' */
+.icon-plus-circled:before {
+  content: '\e803'; }
+
+/* '' */
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-family: "Oxygen";
+  font-weight: 300;
+  margin: 0;
+  background-color: #FBFCFC;
+  min-height: 100% !important;
+  height: 100%;
+  color: #222;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+a {
+  color: #397E8E;
+  text-decoration: none; }
+  a:visited {
+    color: #397E8E; }
+  a:hover {
+    color: #4495A8; }
+
+.container {
+  background-color: #B9CFD6;
+  min-height: 100%;
+  display: block; }
+  .container .wrapper {
+    background-color: #E76E49; }
+
+.heading {
+  width: 100%;
+  margin: auto;
+  max-width: 720px;
+  color: #fff;
+  padding-bottom: 20px; }
+  .heading #header {
+    margin: 0;
+    padding: 1.6em 1em 0em 1em;
+    font-size: 3.8em;
+    font-weight: 300;
+    text-align: center;
+    font-family: 'Open Sans'; }
+  .heading #subheader {
+    font-family: 'Arvo';
+    text-align: center;
+    margin: 0;
+    padding: 0 1em 20px 1em;
+    line-height: 1.6em;
+    font-size: 1.2em;
+    font-weight: 400; }
+
+.error_block {
+  display: block;
+  text-align: center;
+  margin: auto;
+  margin-top: 8px;
+  color: #EE2126;
+  padding: 0.5em 1em 0.5em 1em;
+  background-color: #ddd;
+  border: 2px solid #EE2126;
+  border-radius: 5px;
+  font-size: 0.9em; }
+  .error_block li {
+    list-style: none; }
+
+#query {
+  margin: auto;
+  text-align: center;
+  position: relative; }
+  #query #show_title {
+    width: 85%;
+    max-width: 636px;
+    padding: 10px;
+    font-size: 1.4em;
+    font-family: "Arvo"; }
+  #query #query_submit {
+    position: absolute;
+    top: 20px;
+    right: -4px; }
+  #query a {
+    display: inline-block;
+    line-height: 15px; }
+    #query a i {
+      display: inline-block;
+      font-family: 'fontello';
+      color: #F5B642;
+      font-size: 2.8em;
+      font-weight: 700;
+      border: 0; }
+      #query a i:hover {
+        cursor: pointer;
+        color: #DBA33B; }
+
+.content {
+  background-color: #B9CFD6;
+  height: 100%;
+  display: block;
+  min-height: 100%; }
+
+#mid_wrapper {
+  background-color: #F19D9C;
+  font-weight: 400;
+  margin: auto; }
+  #mid_wrapper #mid_links {
+    max-width: 720px;
+    margin: auto;
+    display: block;
+    padding: 20px 0px 0px 0px;
+    text-align: center !important; }
+    #mid_wrapper #mid_links li {
+      font-size: 1.2em;
+      font-family: "PT Sans";
+      padding: 0px 10px;
+      list-style: none;
+      margin: 0;
+      display: inline; }
+
+strong {
+  font-size: 1.1em;
+  font-family: "Arvo";
+  font-weight: 700; }
+
+.stronger {
+  font-weight: 700; }
+
+.serif {
+  font-family: "Arvo"; }
+
+.next_date {
+  color: #00A6D6; }
+
+#shows {
+  margin: auto;
+  width: 100%;
+  max-width: 960px;
+  display: block;
+  font-family: 'Oxygen';
+  font-weight: 300;
+  font-size: 1em; }
+  #shows img {
+    width: 420px;
+    height: 78px; }
+  #shows li {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    float: left;
+    margin: 10px;
+    padding: 10px;
+    width: 100%;
+    max-width: 440px;
+    display: inline-block;
+    background-color: #FBFCFC;
+    height: 280px;
+    position: relative;
+    text-align: left; }
+    #shows li .icon-cancel-circled {
+      border-radius: 999px;
+      height: 0em;
+      width: 0em;
+      position: absolute;
+      top: -7px;
+      right: 12px;
+      color: #222;
+      font-size: 20px;
+      padding: 0; }
+      #shows li .icon-cancel-circled:hover {
+        cursor: pointer;
+        color: #EE2126; }
+  #shows h2 {
+    padding: 10px 0px 0px 0px;
+    margin: 0px 0px 0px 10px; }
+  #shows p#logged_in_as {
+    font-size: 0.8em;
+    margin: 0px 0px 0px 10px; }
+    #shows p#logged_in_as a {
+      color: #E76E49; }
+      #shows p#logged_in_as a:hover {
+        color: #F19D9C; }
+  #shows .show_view {
+    height: 100%;
+    background-color: #FBFCFC; }
+  #shows .next {
+    font-size: 1em; }
+    #shows .next p {
+      margin-top: 0; }
+  #shows .last {
+    font-size: 0.9em;
+    color: #777; }
+  #shows .ended {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.2em;
+    color: #EE2126;
+    font-family: 'Arvo'; }
+  #shows .resurrect_link {
+    font-size: 0.8em; }
+  #shows .title {
+    color: #888;
+    font-size: 0.8em;
+    text-align: right; }
+
+.footer {
+  clear: left;
+  padding-bottom: 40px; }
+
+#popin {
+  font-weight: 300;
+  margin: auto;
+  display: block;
+  max-width: 720px;
+  padding-bottom: 20px; }
+  #popin #about {
+    display: none; }
+    #popin #about #about_blurb {
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      font-size: 1em;
+      line-height: 1.5em;
+      margin: 0;
+      width: 100%;
+      max-width: 384px;
+      display: inline-block;
+      padding: 12px;
+      font-family: "PT Sans"; }
+    #popin #about #youtube {
+      width: 40%;
+      display: inline-block;
+      padding: 12px; }
+  #popin #signup, #popin #login, #popin #help {
+    display: none;
+    text-align: center;
+    padding: 2%; }
+  #popin #help {
+    text-align: left !important;
+    font-size: 1em;
+    margin: 0;
+    width: 100%;
+    padding: 12px;
+    font-family: "PT Sans"; }
+  #popin input[type=text], #popin input[type=password] {
+    padding: 5px;
+    width: 374px;
+    font-size: 1.2em;
+    font-family: "Open Sans";
+    border: 1px;
+    margin-bottom: 5px; }
+  #popin input[type=submit] {
+    font-size: 1.6em;
+    padding: 2%;
+    background-color: #397E8E;
+    color: #FBFCFC;
+    border: 0px;
+    width: 384px;
+    cursor: pointer;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    transition: all 0.2s ease; }
+    #popin input[type=submit]:hover {
+      background-color: #4495A8; }
+
+@media all and (max-width: 934px) {
+  #shows {
+    text-align: center; }
+    #shows li {
+      float: none; } }
+@media all and (min-width: 800px) and (max-width: 1099px) {
+  body {
+    font-size: 90% !important; }
+
+  #query_submit {
+    right: 0; } }
+@media all and (min-width: 500px) and (max-width: 799px) {
+  body {
+    font-size: 80% !important; }
+
+  #query_submit {
+    right: 4px; } }
+@media all and (min-width: 100px) and (max-width: 499px) {
+  body {
+    font-size: 70% !important; }
+
+  #shows img {
+    width: 340px;
+    height: 63px; }
+
+  #shows li {
+    height: 200px;
+    width: 360px; }
+
+  #show_title {
+    width: 70% !important;
+    font-size: 1.2em !important; }
+
+  #query_submit {
+    top: 15px !important;
+    right: 12px !important; } }
+/* Signup button spaces out a little bit for some unknown reason. This fixes it on my monitor */
+#signup input[type=submit] {
+  margin-left: -4px; }
