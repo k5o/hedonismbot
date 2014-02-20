@@ -6,7 +6,7 @@
     %h2#subheader Track TV shows to see when the next episode or season will air.
     #query
       = form_tag(trackings_path, method: :post, remote: true, id: "query_form_tag")  do
-        = text_field_tag "show_title", "", { placeholder: "Try now: enter a show title, e.g. \"Dexter\"", autofocus: true, required: "required" }
+        = text_field_tag "show_title", "", { placeholder: "Try now: enter a show title, e.g. \"Homeland\"", autofocus: true, required: "required" }
         = submit_tag nil, { id: 'hidden_submit_button', style: 'display: none;' }
         %span#query_submit
           = render "partials/query_submit_button"
